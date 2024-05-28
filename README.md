@@ -17,6 +17,16 @@ OS name: "linux", version: "6.6.31-2-lts", arch: "amd64", family: "unix"
 mvn spring-boot:run
 ```
 
+# データベースのインポート
+
+/dumps/Dump20240528.sqlというファイルはアップロードして
+
+以下のコマンドで、データベースをインポートできる
+```bash
+mysql -u wpj -p sheetdb < ./dump/Dump20240528.sql # ユーザーネームとパスワードを取り替えしてね
+```
+src/main/resources/application.ymlにもusernameとpasswordを取り替えしてね
+
 # API Reference
 
 ## /all/users
