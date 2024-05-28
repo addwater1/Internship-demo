@@ -1,3 +1,21 @@
+# アプリケーションのビルドと起動
+
+## 環境
+```bash
+❯ mvn --version 
+Apache Maven 3.9.2 (c9616018c7a021c1c39be70fb2843d6f5f9b8a1c)
+Maven home: /home/wpj/maven
+Java version: 21.0.1, vendor: Oracle Corporation, runtime: /usr/lib/jvm/jdk-21.0.1
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "6.6.31-2-lts", arch: "amd64", family: "unix"
+```
+
+## 起動
+以下のコマンドを実行してspring bootアプリケーションを起動できる
+```bash
+mvn spring-boot:run
+```
+
 # API Reference
 
 ## /all/users
