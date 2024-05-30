@@ -23,7 +23,11 @@ public class JwtUtil {
                 .compact();
     }
     public boolean validate(String token) {
-        return getClaims(token) != null && isExpired(token);
+//        try {
+            return getClaims(token) != null && isExpired(token);
+//        } catch (Exception e) {
+//            throw e;
+//        }
     }
     public String getUsername(String token) {
         Claims claims = getClaims(token);
