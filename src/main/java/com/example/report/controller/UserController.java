@@ -1,9 +1,11 @@
 package com.example.report.controller;
 
 import com.example.report.pojo.LoginReq;
+import com.example.report.pojo.LoginRes;
 import com.example.report.pojo.SignupReq;
 import com.example.report.pojo.UserEntity;
 import com.example.report.service.UserService;
+import com.example.report.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,9 @@ public class UserController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtil jwtUtil;
     
     @GetMapping("/all/users")
     public List<UserEntity> findAllUser() {
@@ -38,7 +43,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginReq loginReq) {
+    public ResponseEntity<?> login(@RequestBody LoginReq loginReq) {
         int user_id = loginReq.getUser_id();
         String password = loginReq.getPassword();
         try {
@@ -49,8 +54,9 @@ public class UserController {
             return new ResponseEntity<>("Username or password invalid", HttpStatus.BAD_REQUEST);
         }
         UserEntity user = findUserById(user_id);
-        String username = user.getUsername();
-        return new ResponseEntity<>("Welcome " + username + "!", HttpStatus.OK);
+        String token = jwtUtil.generate(user);
+        LoginRes loginRes = new LoginRes(token, user.getUser_id(), user.getUsername());
+        return new ResponseEntity<>(loginRes, HttpStatus.OK);
     }
 
     @PostMapping("/signup")
