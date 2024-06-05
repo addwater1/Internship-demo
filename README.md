@@ -29,11 +29,42 @@ src/main/resources/application.ymlにもusernameとpasswordを取り替えして
 
 # API Reference
 
+## /login
+ユーザーログイン
+
+### example
+要求URL:http://localhost/login
+
+ペイロード:
+```json
+{
+    "user_id": 3,
+    "password": "yamashita123"
+}
+```
+
+応答:
+```json
+{
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNzE3NDkyOTE3fQ.rDHXvV6TENus5bA5Njm-NMmGGQ7uDg9QGAMKeF52Bsw",
+    "user_id": 3,
+    "username": "Yamashita Shizuki"
+}
+```
+
+ログインエラーメッセージ:
+Username or password invalid
+
 ## /all/users
 すべてのユーザーを読み取る
 
 ### example
 要求URL: http://localhost/all/users
+
+http header: 
+```
+Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNzE3NDkyOTE3fQ.rDHXvV6TENus5bA5Njm-NMmGGQ7uDg9QGAMKeF52Bsw
+```
 
 応答: 
 ```json
@@ -91,11 +122,19 @@ src/main/resources/application.ymlにもusernameとpasswordを取り替えして
 ]
 ```
 
+tokenなしの場合:
+Authentication failed
+
 ## /user/{id}
 user_idを指定して、ユーザーの情報を読み取る
 
 ### example
 要求URL:http://localhost/user/7
+
+http header: 
+```
+Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzIiwiZXhwIjoxNzE3NDkyOTE3fQ.rDHXvV6TENus5bA5Njm-NMmGGQ7uDg9QGAMKeF52Bsw
+```
 
 応答:
 ```json
@@ -105,6 +144,9 @@ user_idを指定して、ユーザーの情報を読み取る
     "password": "$2a$10$ZXKDoMtn9tFntBjcPx71gesF8FePmiGomg5y4WnSEpiS9cToVeoPK"
 }
 ```
+
+tokenなしの場合:
+Authentication failed
 
 ## /signup
 ユーザー新規登録
@@ -123,22 +165,4 @@ user_idを指定して、ユーザーの情報を読み取る
 応答:
 Signup successfully!
 
-## /login
-ユーザーログイン
 
-### example
-要求URL:http://localhost/login
-
-ペイロード:
-```json
-{
-    "user_id": 3,
-    "password": "yamashita123"
-}
-```
-
-応答:
-Welcome Yamashita Shizuki!
-
-ログインエラーメッセージ:
-Username or password invalid
