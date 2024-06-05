@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/report-front-end/node_modules
+/report-front-end/dist

@@ -1,5 +1,5 @@
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/sheetdb
-    username: wpj
-    password: root
+    username: root
+    password: 123456
